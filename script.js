@@ -1,252 +1,3 @@
-
-<html>
-	<head>
-		<link rel="stylesheet" type="text/css" >		
-	</head>
-	<body>
-		<div class="machine">
-			<div class="container">
-				<div class="winner">
-				</div>
-			</div>
-			<div class="handle">		    		    	
-		    </div>			
-		 </div>
-		<style scope id="setting"></style>
-		<style scope id="update"></style>
-		<script type="text/javascript" ></script>
-	
-	<style>
-	*{
-  padding : 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-.machine{
-  display: inline-block;
-  position: relative;
-  opacity: 0;
-}
-.container{
-  width : 1200px;
-  height : 400px;
-  border-style : solid;
-  border-color : hsl(0,10%,50%) hsl(0,20%,50%) hsl(0,10%,50%) hsl(0,20%,50%);
-  border-width : 15px;
-  display : flex;
-  background: linear-gradient(to bottom, #696992 0%, #afb0b7 20%, #e9e9e9 35%, #8f9e90 69%, #e7e7e7 100%);
-  box-shadow: inset 0 0 0px #000000;
-  position: relative;
-  overflow: hidden;
-  float: left;
-  background-clip: content-box;
-  align-content: left;
-}
-.container:before{
-  content: '';
-  position: absolute;
-  width: calc(100% - 40px);
-  top : calc(50% - 20px);
-  left: 0;
-  border-style: solid;
-  border-width: 20px 20px;
-  border-color: transparent hsla(0,70%,50%,0.75) transparent hsla(0,70%,50%,0.75);
-  height : 2px;
-  background-color: rgba(250,250,250,0.5);
-  overflow: hidden;
-  z-index: 1;
-  background-clip: content-box;
-}
-.container:after{
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background : linear-gradient(to bottom, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0) 80%,rgba(0,0,0,0.8) 100%);
-}
-.col{
-  width: 100%;
-  //transition: transform 0.2s linear;
-}
-.row{
-  border-style: solid;
-  border-color : #eee;
-  border-width: 2px;
-  //border-radius : 50%;
-}
-.row:after{
-  content: '';
-  display: block;
-  padding-top: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-
-/*加藤屋*/
-.katayo:after      {background-image : url(https://static5.orstatic.com/userphoto/photo/F/CMV/02HUNGFE6065392B07E4FEpx.jpg);}
-
-/*McDonald*/
-.McDonald:after      {background-image : url(https://diylogodesigns.com/wp-content/uploads/2016/04/Mcdonalds-logo-png-Transparent-768x538.png);}
-
-/*新世紀廣場*/
-.moko:after      {background-image : url(https://is4-ssl.mzstatic.com/image/thumb/Purple114/v4/04/8a/b9/048ab941-2072-59f2-20e1-f8efa83959b7/AppIcon-1x_U007emarketing-85-220-6.png/246x0w.jpg);}
-
-/*元氣*/
-.genki:after     {background-image : url(https://upload.wikimedia.org/wikipedia/zh/thumb/3/34/Genkisushi.svg/1200px-Genkisushi.svg.png);}
-
-/*譚仔*/
-.tamjai:after {background-image : url(https://hk.ulifestyle.com.hk/cms/images/topic/w600/201803/20180321183804_14_20180320200322_17_TAMM16.jpg);}
-
-/* 吉野家*/
-.Yoshinoya:after     {background-image:  url(http://img.sj33.cn/uploads/allimg/201402/7-140206213S5215.png);}
-
-/*爭鮮*/
-.sushi-express:after        {background-image : url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD1P8Bp_uFyOIOMgPLERYxeq4iLuZiVWUB4yXZKszOBCMD9p37);}
-
-/*大家樂*/
-.cafe-de-coral:after      {background-image : url(https://vignette.wikia.nocookie.net/evchk/images/9/97/Cafe_de_Carol_Logo_%28New%29.jpg/revision/latest?cb=20180605055530);}
-
-/*四叔*/
-.uncle-4:after     {background-image : url(https://scontent.fhkg1-1.fna.fbcdn.net/v/t1.0-9/18670747_675561772644849_1836383519707790558_n.jpg?_nc_cat=111&_nc_ht=scontent.fhkg1-1.fna&oh=1bd34f763de2a0db47775b39b0bd200b&oe=5D2D07A8);}
-
-/*西九*/
-.dragon-center:after     {background-image : url(https://upload.wikimedia.org/wikipedia/zh/0/0e/Dragon_Centre.png);}
-/*-------------=== winner style ===-------------
-.winner{
-  background-color: transparent;
-  -webkit-transition: transform 0.1s linear,background-color 0.1s ease;
-  -moz-transition: transform 0.1s linear,background-color 0.1s ease;
-  -o-transition: transform 0.1s linear,background-color 0.1s ease;
-  transition: transform 0.1s linear,background-color 0.1s ease;
-  -webkit-transform: scale(0);
-  -moz-transform: scale(0);
-  -o-transform: scale(0);
-  transform: scale(0);
-  pointer-events: none;
-}
-.winner.active{
-  -webkit-transition: transform 0.1s linear,background-color 0.5s ease;
-  -moz-transition: transform 0.1s linear,background-color 0.5s ease;
-  -o-transition: transform 0.1s linear,background-color 0.5s ease;
-  transition: transform 0.1s linear,background-color 0.5s ease;
-  background-color: rgba(0,0,0,0.5);
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -o-transform: scale(1);
-  transform: scale(1);
-}
-.winner,.winner:before,.winner:after{
-  position: absolute;
-  top: 0;
-  left :0;
-  width: 100%;
-  height: 100%;
-  content: '';
-  display: block;
-  z-index: 3;
-}
-.winner:before,.winner:after{
-  width: 100vw;
-  height: 100vw;
-  top : -25vw;
-}
-.winner:before{
-  background : url(//bannerflow.blob.core.windows.net/resources/winner2-d4e9ae90-43f8-4575-99b9-fc675462bc35.svg?v=636058905940602803) no-repeat center;
-  background-size: cover;
-  -webkit-animation: rotateBackground 12s linear infinite;
-  -moz-animation:    rotateBackground 12s linear infinite;
-  -o-animation:      rotateBackground 12s linear infinite;
-  animation:         rotateBackground 12s linear infinite;
-}
-.winner:after{
-  background : url(//bannerflow.blob.core.windows.net/resources/winner1-e3971196-c01b-4985-8303-3a1829f2d529.svg?v=636058905940602803) no-repeat center;
-  background-size: 50% 50%;
-  -webkit-animation: scaleForeground 2s linear infinite;
-  -moz-animation:    scaleForeground 2s linear infinite;
-  -o-animation:      scaleForeground 2s linear infinite;
-  animation:         scaleForeground 2s linear infinite;
-}
-@-webkit-keyframes rotateBackground {
-  100% { -webkit-transform: rotate(360deg); }
-}
-@-moz-keyframes rotateBackground {
-  100% { -moz-transform: rotate(360deg); }
-}
-@-o-keyframes rotateBackground {
-  100% { -o-transform: rotate(360deg); }
-}
-@keyframes rotateBackground {
-  100% { transform: rotate(360deg); }
-}
-@-webkit-keyframes scaleForeground {
-  50% { -webkit-transform: scale(0.5); }
-}
-@-moz-keyframes scaleForeground {
-  50% { -moz-transform: scale(0.5); }
-}
-@-o-keyframes scaleForeground {
-  50% { -o-transform: scale(0.5); }
-}
-@keyframes scaleForeground {
-  50% { transform: scale(0.5); }
-}
-/*-----------------------------------------------*/
-.handle{
-  position: relative;
-  float: left;
-  vertical-align: top;
-  height : 60px;
-  margin-top : 70px;
-  width : 15px;
-  border-radius: 0 5px 5px 0/20px;
-  border : 1px solid rgba(189, 160, 112, 0.5);
-  background : linear-gradient(to bottom, #CD9819 0%,#f5f5f5 20%,#e2ba78 67%, #b6783d 90%, #CD9819 100%);
-}
-.handle,.handle:before,.handle:after{
-  transition: all 0.2s linear;
-  cursor: pointer;
-}
-.handle:before,.handle:after{
-  content: '';
-  display: block;
-  position: absolute;
-}
-.handle:before{
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgba(163,126,67,0.1);
-  background: linear-gradient(to right, #f5d6b1 0%, #cc9310 20%,#f1e767 60%,#f5f5f5 90%,#f1e767 100%);
-  width: 8px;
-  height: 80px;
-  bottom: 30px;
-  right: -10px;
-  border-bottom-right-radius: 10px 8px;
-}
-.handle:after{
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  top: -64px;
-  right: -17px;
-  border: 1px solid rgba(204,147,16,0.3);
-  background: radial-gradient(ellipse at 75% 25%, #ffffff 0%,#f1e767 25%,#cc9310 60%,#feb645 91%);
-}
-.handle.active{
-  background-position:0 47px;
-}
-.handle.active:before{
-  height: 0px;
-  border-bottom-right-radius: 2px;
-  transform: translateY(5px);
-}
-.handle.active:after{
-  transform: translateY(85px);
-}
-
-</style>
-
-<script>
 var fps           = 60;
 window.raf = (function(){
   return requestAnimationFrame || webkitRequestAnimationFrame || mozRequestAnimationFrame || function(c){setTimeout(c,1000/fps);};
@@ -257,9 +8,9 @@ window.raf = (function(){
   defaultSettings = {
     width           : "500",
     height          : "500",
-    colNum          : 10,
-    rowNum          : 10,
-    winRate         : 10,
+    colNum          : 6,
+    rowNum          : 6,
+    winRate         : 40,
     autoPlay        : false,
     autoSize        : false,
     autoPlayTime    : 10,
@@ -270,16 +21,12 @@ window.raf = (function(){
     machineBorder   : 15,
     machineColor    : 'rgba(120,60,30,1)',
     names           : [
-      "McDonald",
-      "moko",
-      "genki",
-      "tamjai",
-      "Yoshinoya",
-      "sushi-express",
-      "cafe-de-coral",
-      "uncle-4",
-      "dragon-center",
-      "katayo"
+      "letter-I",
+      "letter-K",
+      "letter-E",
+      "letter-A",
+      "number-7",
+      "number-6"
     ]
   },
   completed       = true,
@@ -632,8 +379,3 @@ if (typeof BannerFlow != 'undefined') {
     widget.beforeRun();
   })
 }
-
-
-</script>
-</body>
-</html>
