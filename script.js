@@ -1,6 +1,6 @@
 var fps           = 60;
 window.raf = (function(){
-  return requestAnimationFrame || webkitRequestAnimationFrame || mozRequestAnimationFrame || function(c){setTimeout(c,1000/fps);};
+  return requestAnimationFrame || webkitRequestAnimationFrame || mozRequestAnimationFrame || function(c){setTimeout(c,10000/fps);};
 })();
 /*--------------=== Slot machine definition ===--------------*/
 (function() {
@@ -8,9 +8,9 @@ window.raf = (function(){
   defaultSettings = {
     width           : "500",
     height          : "500",
-    colNum          : 6,
+    colNum          : 4,
     rowNum          : 6,
-    winRate         : 40,
+    winRate         : 10,
     autoPlay        : false,
     autoSize        : false,
     autoPlayTime    : 10,
@@ -45,7 +45,7 @@ window.raf = (function(){
     this.colArr = [];
     this.options = {};
   }
-  SlotMachine.prototype.beforeRun = function(){    
+  SlotMachine.prototype.beforeRun = function(){
     if (completed) {
       this.showWin(false);
       completed = false;
@@ -53,10 +53,11 @@ window.raf = (function(){
       result = this.options.names[random(this.options.rowNum*100/this.options.winRate)|0];//set winrate
       for(var i=0;i<this.options.colNum;i++){
         this.colArr[i].beforeRun(result);
-      }      
+      }
       this.rotateHandle();
       this.run();
-    }    
+      playMusic();
+    }
     if (this.options.autoPlay) nextLoop = setTimeout(function(){this.beforeRun()}.bind(this),this.options.autoPlayTime*10000);
   }
   SlotMachine.prototype.afterRun = function(){
@@ -82,11 +83,11 @@ window.raf = (function(){
       handle.addClass("active");
       setTimeout(function(){
         handle.removeClass("active");
-      },1000); 
+      },1000);
     }
   }
-  SlotMachine.prototype.run = function(){    
-    var done = true;    
+  SlotMachine.prototype.run = function(){
+    var done = true;
     for(var i=0;i<this.options.colNum;i++){
       done &= this.colArr[i].run();
     }
@@ -121,13 +122,13 @@ window.raf = (function(){
       this.options.machineBorder = settings.machineBorder>=0 ? settings.machineBorder : defaultSettings.machineBorder;
       this.options.height = settings.height ? settings.height : defaultSettings.height;
       this.options.width = settings.width ? settings.width : defaultSettings.width;
-      this.options.autoSize = settings.autoSize;            
+      this.options.autoSize = settings.autoSize;
       if (this.options.autoSize) {
         this.options.height = window.innerHeight;
         this.options.width = window.innerWidth;
       }
       this.options.handleShow = settings.handleShow;
-      this.options.handleWidth = this.options.handleShow ? defaultSettings.handleWidth : 0;      
+      this.options.handleWidth = this.options.handleShow ? defaultSettings.handleWidth : 0;
       this.options.autoPlayTime = settings.autoPlayTime ? settings.autoPlayTime : defaultSettings.autoPlayTime;
       this.options.customImage = settings.customImage;
     }
@@ -141,9 +142,9 @@ window.raf = (function(){
         settingStyle += getStyle("."+name+":after",{
           "background-image"  : "url('"+urls[i]+"')"
         });
-      }      
+      }
     }
-    settingStyle += getStyle(".machine",{      
+    settingStyle += getStyle(".machine",{
       "margin-top"          : (window.innerHeight - this.options.height)/2 +"px",
       "margin-left"         : (window.innerWidth - this.options.width)/2 +"px"
     });
@@ -163,7 +164,7 @@ window.raf = (function(){
     settingStyle += getStyle(".handle",{
       "margin-top"          : this.options.height/2-this.options.handleHeight+"px"
     });
-    document.querySelector("#setting").innerHTML = settingStyle;    
+    document.querySelector("#setting").innerHTML = settingStyle;
     //remove old cols
     if (this.colArr && this.colArr.length > 0)
       for (var i=0;i<this.colArr.length;i++){
@@ -214,7 +215,7 @@ window.raf = (function(){
       slotTrigger.addEventListener("click",function(e){
         this.addClass('slot-triggerDown');
       })
-    }    
+    }
   }
   window[NAME]= SlotMachine;
 })();
@@ -378,4 +379,9 @@ if (typeof BannerFlow != 'undefined') {
     widget.init();
     widget.beforeRun();
   })
+}
+
+function playMusic(){
+  var mario = new Audio("audios/mario.mp3");
+  mario.play();
 }

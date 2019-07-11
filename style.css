@@ -212,3 +212,11 @@
 .handle.active:after{
   transform: translateY(85px);
 }
+
+#logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+  padding: 10px;
+}
